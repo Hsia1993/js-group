@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To-Do List - Main Page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+    />
+    <link rel="stylesheet" href="styles/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>To-Do List</h1>
+      <form id="addTaskForm">
+        <input
+          type="text"
+          id="title"
+          required
+          placeholder="Title"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          id="assignee"
+          required
+          placeholder="Assignee"
+          autocomplete="off"
+        />
+        <textarea
+          id="description"
+          placeholder="Description"
+          autocomplete="off"
+          rows="4"
+          cols="50"
+        ></textarea>
+        <input
+          type="text"
+          id="deadline"
+          class="datepicker"
+          required
+          placeholder="Date"
+          autocomplete="off"
+        />
+        <select id="type" required placeholder="Type">
+          <option value="work">Work</option>
+          <option value="personal">Study</option>
+          <option value="personal">Personal</option>
+        </select>
+
+        <button type="submit">Add Task</button>
+      </form>
+      <div class="nav">
+        <a href="index.html">Current Tasks</a>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/task.js"></script>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+h1,
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  margin-bottom: 20px;
+}
+form textarea,
+form input,
+form select {
+  margin-bottom: 24px;
+}
+
+textarea,
+input,
+select {
+  display: block;
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 16px;
+  margin: 0;
+  padding: 4px 11px;
+  color: rgba(0, 0, 0, 0.88);
+  font-size: 14px;
+  height: 40px;
+}
+textarea:focus,
+input:focus,
+select:focus {
+  border-color: #4095ff;
+  box-shadow: -1 0 0 2px rgba(5, 145, 255, 0.1);
+  outline: none;
+}
+
+button {
+  box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #fff;
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  position: relative;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  height: 56px;
+  box-sizing: border-box;
+}
+
+.task-type h3 {
+  margin-bottom: 10px;
+}
+
+.taskIcon {
+  width: 30px;
+  cursor: pointer;
+}
+
+.taskDate,
+.assignee {
+  position: absolute;
+  font-size: 12px;
+  font-weight: bold;
+  top: -8px;
+  display: block;
+  background: #fff;
+  color: #777;
+}
+.assignee {
+  right: 20px;
+}
+.description {
+  color: #999;
+  font-size: 12px;
+}
+.taskInfo {
+  display: flex;
+  align-items: center;
+}
+
+.typeTag {
+  display: inline-block;
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 4px 8px;
+  background: #108ee9;
+  color: #fff;
+  margin-right: 8px;
+}
+.typeTag.personal {
+  background: #87d068;
+}
+
+.nav a {
+  color: #108ee9;
+  text-decoration: none;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.noData {
+  justify-content: center;
+  color: #888;
+}

@@ -21,7 +21,19 @@ $(document).ready(function () {
   // Display current tasks
   function displayCurrentTasks(keyWord = undefined) {
     const sortedTasks = getSortedCurrentTasks();
-    const tasks = sortedTasks.filter((task) => !task.completed);
+
+    const tasks = sortedTasks.filter((task) => {
+      if (task.completed) {
+        return false;
+      } else {
+        if (keyWord) {
+          return task.title.indexOf(keyWord) != -1 || task.description.indexOf(keyWord) != -1 || task.assignee.indexOf(keyWord) != -1;
+        } else {
+          return true;
+        }
+      }
+    });
+
     $("#taskLists").empty();
     if (tasks.length === 0) {
       $("#taskLists").html("<li class='noData'>No data</li>");
@@ -45,7 +57,19 @@ $(document).ready(function () {
   // Display completed tasks
   function displayCompletedTasks(keyWord = undefined) {
     const sortedTasks = getSortedCurrentTasks();
-    const tasks = sortedTasks.filter((task) => task.completed).reverse();
+
+    const tasks = sortedTasks.filter((task) => {
+      if (task.completed) {
+        if (keyWord) {
+          return task.title.indexOf(keyWord) != -1 || task.description.indexOf(keyWord) != -1 || task.assignee.indexOf(keyWord) != -1;
+        } else {
+          return true;
+        }
+      } else {
+        return false;
+      }
+    }).reverse();
+
     $("#taskLists").empty();
     if (tasks.length === 0) {
       $("#taskLists").html("<li class='noData'>No data</li>");

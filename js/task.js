@@ -18,8 +18,9 @@ $(document).ready(function () {
   let taskId = url.split("?taskId=")[1];
   console.log(`taskId: ${taskId}`);
 
+  let task = undefined
   if (taskId) {
-    let task = tasks.find((task) => task.id === taskId);
+    task = tasks.find((task) => task.id === taskId);
     if (task) {
       $("#title").val(task.title)
       $("#assignee").val(task.assignee)
@@ -46,15 +47,22 @@ $(document).ready(function () {
       return acc;
     }, {});
 
-    // Create task object
-    const task = {
-      ...data,
-      id: uuid(),
-      completed: false,
-    };
+    if (task) {
+      for (let key in data) {
+        task[key] = data[key]
+      }
+      task['completed'] = false
+    } else {
+      // Create task object
+      task = {
+        ...data,
+        id: uuid(),
+        completed: false,
+      };
+      tasks.push(task);
+    }
 
     // Add task to tasks array
-    tasks.push(task);
     localStorage.setItem("data", JSON.stringify(tasks));
 
     // Clear the form

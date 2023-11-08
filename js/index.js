@@ -19,7 +19,7 @@ $(document).ready(function () {
     `;
   }
   // Display current tasks
-  function displayCurrentTasks() {
+  function displayCurrentTasks(keyWord = undefined) {
     const sortedTasks = getSortedCurrentTasks();
     const tasks = sortedTasks.filter((task) => !task.completed);
     $("#taskLists").empty();
@@ -32,9 +32,9 @@ $(document).ready(function () {
             task,
             `
             <div class=action>
-                <img class="taskIcon completeTask" src="assets/tick.svg" data-id="${task.id}"></img>
-                <img class="taskIcon deleteTask" src="assets/close.svg" data-id="${task.id}"></img>
                 <img class="taskIcon editTask" src="assets/edit.svg" data-id="${task.id}"></img>
+                <img class="taskIcon completeTask" src="assets/finish.svg" data-id="${task.id}"></img>
+                <img class="taskIcon deleteTask" src="assets/delete.svg" data-id="${task.id}"></img>
             </div>
           `
           )
@@ -43,7 +43,7 @@ $(document).ready(function () {
     }
   }
   // Display completed tasks
-  function displayCompletedTasks() {
+  function displayCompletedTasks(keyWord = undefined) {
     const sortedTasks = getSortedCurrentTasks();
     const tasks = sortedTasks.filter((task) => task.completed).reverse();
     $("#taskLists").empty();
@@ -63,6 +63,11 @@ $(document).ready(function () {
     );
     return sortedTasks;
   }
+
+  $("#task-filter").on("input", function () {
+    let keyWord = $("#task-filter").val()
+    displayCurrentTasks(keyWord)
+  })
 
   // Delete task on button click
   $(document).on("click", ".deleteTask", function () {
@@ -96,11 +101,11 @@ $(document).ready(function () {
     const text = $(this).text();
     const $h1 = $("h1");
     if (text === "Completed Tasks") {
-      displayCompletedTasks();
+      displayCompletedTasks($("#task-filter").val());
       $text.text("Current Tasks");
       $h1.text("Completed Tasks");
     } else {
-      displayCurrentTasks();
+      displayCurrentTasks($("#task-filter").val());
       $text.text("Completed Tasks");
       $h1.text("Current Tasks");
     }

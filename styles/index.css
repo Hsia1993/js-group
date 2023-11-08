@@ -10,7 +10,7 @@ h2 {
 }
 
 .container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   border: 1px solid #ccc;
   padding: 20px;
@@ -51,7 +51,7 @@ select:focus {
   outline: none;
 }
 
-button {
+.submit-btn {
   box-shadow: 0 2px 0 rgba(5, 145, 255, 0.1);
   background-color: #007bff;
   border: none;
@@ -73,7 +73,7 @@ li {
   border: 1px solid #ccc;
   border-radius: 4px;
   position: relative;
-  padding: 10px;
+  padding: 30px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,7 +87,8 @@ li {
 }
 
 .taskIcon {
-  width: 30px;
+  margin-left: 6px;
+  width: 25px;
   cursor: pointer;
 }
 
@@ -118,9 +119,12 @@ li {
   border-radius: 4px;
   font-size: 12px;
   padding: 4px 8px;
-  background: #108ee9;
+  background: #e915c2;
   color: #fff;
   margin-right: 8px;
+}
+.typeTag.study {
+  background: #108ee9;
 }
 .typeTag.personal {
   background: #87d068;

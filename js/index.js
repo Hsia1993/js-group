@@ -34,6 +34,7 @@ $(document).ready(function () {
             <div class=action>
                 <img class="taskIcon completeTask" src="assets/tick.svg" data-id="${task.id}"></img>
                 <img class="taskIcon deleteTask" src="assets/close.svg" data-id="${task.id}"></img>
+                <img class="taskIcon editTask" src="assets/edit.svg" data-id="${task.id}"></img>
             </div>
           `
           )
@@ -79,6 +80,14 @@ $(document).ready(function () {
     tasks.find((task) => task.id === id).completed = true;
     localStorage.setItem("data", JSON.stringify(tasks));
     displayCurrentTasks();
+  });
+
+  // Edit task on button click
+  $(document).on("click", ".editTask", function () {
+    const id = $(this).data("id");
+    console.log(id, tasks);
+
+    location.href = `task.html?taskId=${id}`
   });
 
   //Toggle current and completed tasks

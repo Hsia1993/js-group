@@ -14,6 +14,21 @@ $(document).ready(function () {
     minDate: 0,
   });
 
+  let url = decodeURI(window.location.href);
+  let taskId = url.split("?taskId=")[1];
+  console.log(`taskId: ${taskId}`);
+
+  if (taskId) {
+    let task = tasks.find((task) => task.id === taskId);
+    if (task) {
+      $("#title").val(task.title)
+      $("#assignee").val(task.assignee)
+      $("#description").val(task.description)
+      $("#deadline").val(task.deadline)
+      $("#type").val(task.type)
+    }
+  }
+
   // Submit form to add a new task
   $("#addTaskForm").submit(function (event) {
     event.preventDefault();

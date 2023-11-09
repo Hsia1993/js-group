@@ -6,8 +6,8 @@ $(document).ready(function () {
     return `
           <li class="${task.type}">
             <div class="taskName">
-              <div class="taskDate">${task.deadline}</div>
-              <div class="assignee">${task.assignee}</div>
+              <div class="taskDate bg${task.type}">${task.deadline}</div>
+              <div class="assignee bg${task.type}">${task.assignee}</div>
               <strong>${task.title}</strong>
               <div class="description">${task.description}</div>
             </div>

@@ -167,6 +167,8 @@ li {
   background-color: #fff7fe ;
 }
 
+/* Type Tags Background Colors */
+
 .typeTag.completed {
   background: #47a025;
 }
@@ -182,6 +184,21 @@ li {
 .typeTag.work {
   background: #e915c2;
 }
+
+/* Assignee Background Colors */
+.bgstudy {
+  background: #f1f9ff;
+}
+
+.bgpersonal {
+  background: #f9fef3;
+}
+
+.bgwork {
+  background: #fff7fe;
+}
+
+
 
 .nav a {
   color: #108ee9;

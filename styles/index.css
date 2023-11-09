@@ -155,12 +155,32 @@ li {
   margin-right: 8px;
 }
 
+.personal{
+  background-color: #f9fef3;
+}
+
+.study{
+  background-color: #f1f9ff;
+}
+
+.work{
+  background-color: #fff7fe ;
+}
+
+.typeTag.completed {
+  background: #47a025;
+}
+
 .typeTag.study {
   background: #108ee9;
 }
 
 .typeTag.personal {
   background: #87d068;
+}
+
+.typeTag.work {
+  background: #e915c2;
 }
 
 .nav a {

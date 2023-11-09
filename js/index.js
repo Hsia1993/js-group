@@ -4,7 +4,7 @@ $(document).ready(function () {
   // render task display html string
   function renderTaskHtml(task, extra = "") {
     return `
-          <li>
+          <li class="${task.type}">
             <div class="taskName">
               <div class="taskDate">${task.deadline}</div>
               <div class="assignee">${task.assignee}</div>
@@ -77,7 +77,7 @@ $(document).ready(function () {
       $("#taskLists").html("<li class='noData'>No data</li>");
     } else {
       tasks.forEach((task) => {
-        $("#taskLists").append(renderTaskHtml(task,`<div class="typeTag personal"><b>Completed</b></div>`));
+        $("#taskLists").append(renderTaskHtml(task,`<div class="typeTag completed"><b>Completed</b></div>`));
       });
     }
   }

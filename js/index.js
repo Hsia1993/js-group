@@ -18,6 +18,7 @@ $(document).ready(function () {
         </li>
     `;
   }
+
   // Display current tasks
   function displayCurrentTasks(keyWord = undefined) {
     const sortedTasks = getSortedCurrentTasks();
@@ -54,6 +55,7 @@ $(document).ready(function () {
       });
     }
   }
+
   // Display completed tasks
   function displayCompletedTasks(keyWord = undefined) {
     const sortedTasks = getSortedCurrentTasks();
@@ -75,7 +77,7 @@ $(document).ready(function () {
       $("#taskLists").html("<li class='noData'>No data</li>");
     } else {
       tasks.forEach((task) => {
-        $("#taskLists").append(renderTaskHtml(task));
+        $("#taskLists").append(renderTaskHtml(task,`<div class="typeTag personal"><b>Completed</b></div>`));
       });
     }
   }

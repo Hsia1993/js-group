@@ -87,6 +87,10 @@ li {
   box-sizing: border-box;
 }
 
+#task-filter::placeholder {
+  opacity: 0.5;
+}
+
 .task-type h3 {
   margin-bottom: 10px;
 }

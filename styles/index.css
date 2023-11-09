@@ -155,6 +155,15 @@ li {
   margin-right: 8px;
 }
 
+.typeTag {
+  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.typeTag:hover {
+  filter: saturate(150%);
+  transform: scale(1.1);
+}
+
 .personal{
   background-color: #f9fef3;
 }

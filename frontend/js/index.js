@@ -1,5 +1,10 @@
-$(document).ready(function () {
-  let tasks = JSON.parse(localStorage.getItem("data") || "[]");
+$(document).ready(async function () {
+  // let tasks = JSON.parse(localStorage.getItem("data") || "[]");
+  let tasks = [];
+  try {
+    const { data } = await axios.get("/api/tasks");
+    tasks = data.data;
+  } catch (e) {}
   displayCurrentTasks();
   // render task display html string
   function renderTaskHtml(task, extra = "") {
@@ -28,7 +33,11 @@ $(document).ready(function () {
         return false;
       } else {
         if (keyWord) {
-          return task.title.indexOf(keyWord) != -1 || task.description.indexOf(keyWord) != -1 || task.assignee.indexOf(keyWord) != -1;
+          return (
+            task.title.indexOf(keyWord) != -1 ||
+            task.description.indexOf(keyWord) != -1 ||
+            task.assignee.indexOf(keyWord) != -1
+          );
         } else {
           return true;
         }
@@ -45,9 +54,9 @@ $(document).ready(function () {
             task,
             `
             <div class=action>
-                <img class="taskIcon editTask" src="assets/edit.svg" data-id="${task.id}"></img>
-                <img class="taskIcon completeTask" src="assets/finish.svg" data-id="${task.id}"></img>
-                <img class="taskIcon deleteTask" src="assets/delete.svg" data-id="${task.id}"></img>
+                <img class="taskIcon editTask" src="assets/edit.svg" data-id="${task._id}"></img>
+                <img class="taskIcon completeTask" src="assets/finish.svg" data-id="${task._id}"></img>
+                <img class="taskIcon deleteTask" src="assets/delete.svg" data-id="${task._id}"></img>
             </div>
           `
           )
@@ -60,24 +69,35 @@ $(document).ready(function () {
   function displayCompletedTasks(keyWord = undefined) {
     const sortedTasks = getSortedCurrentTasks();
 
-    const tasks = sortedTasks.filter((task) => {
-      if (task.completed) {
-        if (keyWord) {
-          return task.title.indexOf(keyWord) != -1 || task.description.indexOf(keyWord) != -1 || task.assignee.indexOf(keyWord) != -1;
+    const tasks = sortedTasks
+      .filter((task) => {
+        if (task.completed) {
+          if (keyWord) {
+            return (
+              task.title.indexOf(keyWord) != -1 ||
+              task.description.indexOf(keyWord) != -1 ||
+              task.assignee.indexOf(keyWord) != -1
+            );
+          } else {
+            return true;
+          }
         } else {
-          return true;
+          return false;
         }
-      } else {
-        return false;
-      }
-    }).reverse();
+      })
+      .reverse();
 
     $("#taskLists").empty();
     if (tasks.length === 0) {
       $("#taskLists").html("<li class='noData'>No data</li>");
     } else {
       tasks.forEach((task) => {
-        $("#taskLists").append(renderTaskHtml(task,`<div class="typeTag completed"><b>Completed</b></div>`));
+        $("#taskLists").append(
+          renderTaskHtml(
+            task,
+            `<div class="typeTag completed"><b>Completed</b></div>`
+          )
+        );
       });
     }
   }
@@ -91,34 +111,38 @@ $(document).ready(function () {
   }
 
   $("#task-filter").on("input", function () {
-    let keyWord = $("#task-filter").val()
-    displayCurrentTasks(keyWord)
-  })
+    let keyWord = $("#task-filter").val();
+    displayCurrentTasks(keyWord);
+  });
 
   // Delete task on button click
-  $(document).on("click", ".deleteTask", function () {
+  $(document).on("click", ".deleteTask", async function () {
     const id = $(this).data("id");
-    console.log(id, tasks);
-    tasks = tasks.filter((task) => task.id !== id);
-    localStorage.setItem("data", JSON.stringify(tasks));
-    displayCurrentTasks();
+    try {
+      await axios.delete(`/api/task/${id}`);
+      tasks = tasks.filter((task) => task._id !== id);
+      displayCurrentTasks();
+    } catch (e) {
+      console.log(e);
+    }
   });
 
   // Complete task on button click
-  $(document).on("click", ".completeTask", function () {
+  $(document).on("click", ".completeTask", async function () {
     const id = $(this).data("id");
-    console.log(id, tasks);
-    tasks.find((task) => task.id === id).completed = true;
-    localStorage.setItem("data", JSON.stringify(tasks));
-    displayCurrentTasks();
+    try {
+      await axios.put(`/api/task/${id}/complete`);
+      tasks.find((task) => task._id === id).completed = true;
+      displayCurrentTasks();
+    } catch (e) {
+      console.log(e);
+    }
   });
 
   // Edit task on button click
   $(document).on("click", ".editTask", function () {
     const id = $(this).data("id");
-    console.log(id, tasks);
-
-    location.href = `task.html?taskId=${id}`
+    location.href = `/task?taskId=${id}`;
   });
 
   //Toggle current and completed tasks
